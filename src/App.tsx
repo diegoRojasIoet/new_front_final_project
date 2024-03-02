@@ -1,13 +1,25 @@
-import { EmptyTodos } from './components/molecules/LoadingSkeletons/EmptyTodos';
-import { TodosError } from './components/molecules/LoadingSkeletons/Error/Error';
-import { TodoCounter } from './components/molecules/TodoCounter'
-import { TodoList } from './components/molecules/TodoList';
-import { TodoItem } from './components/molecules/TodoList/TodoItem';
-import { TodoSearch } from './components/molecules/TodoSearch/TodoSearch'
+import { EmptyTodos } from './Components/Molecules/LoadingSkeletons/EmptyTodos';
+import { TodosError } from './Components/Molecules/LoadingSkeletons/Error/Error';
+import { TodoCounter } from './Components/Molecules/TodoCounter'
+import { TodoList } from './Components/Molecules/TodoList';
+import { TodoItem } from './Components/Molecules/TodoList/TodoItem';
+import { TodoSearch } from './Components/Molecules/TodoSearch/TodoSearch'
+import { useTodos } from './Hooks/useTodos';
 
 
 function App() {
 
+  const { state, stateUpdater } = useTodos([]);
+
+  const {
+    totalTasks,
+    filteredTodoList
+  } = state;
+
+  const {
+    toggleTodo,
+    deleteTodo
+  } = stateUpdater;
 
   return (
 
@@ -17,10 +29,10 @@ function App() {
       <TodoSearch searchValue={'searchValue'} setSearchValue={() => { }} loading={false} />
 
       <TodoList
-        error={true}
+        error={false}
         loading={false}
-        filteredTodoList={[]}
-        totalTasks={5}
+        filteredTodoList={filteredTodoList}
+        totalTasks={totalTasks}
         onError={() => <TodosError></TodosError>}
         onLoading={() => <></>}
         onEmptyTodos={() => <EmptyTodos></EmptyTodos>}
@@ -29,8 +41,8 @@ function App() {
           return <TodoItem
             key={todo.text}
             todo={todo}
-            onComplete={() => () => { }}
-            onDelete={() => () => { }}
+            onComplete={()=> toggleTodo(todo.text)}
+            onDelete = {() => deleteTodo(todo.text)} 
           />
         }} />
     </header>

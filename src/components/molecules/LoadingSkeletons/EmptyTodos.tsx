@@ -18,7 +18,7 @@ const ContainerText = styled(ContainerError)`
 `;
 
 const Figure = styled.figure`
-  margin-bottom: 0;
+  margin: 0;
   width: 100%;
   height: 100%;
 `;

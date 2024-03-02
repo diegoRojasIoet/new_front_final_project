@@ -37,7 +37,7 @@ const ListItem: FC<PropsWithChildren> = styled.ul`
 interface TodoListProps {
     error: boolean;
     loading: boolean;
-    filteredTodoList: string[];
+    filteredTodoList: Object[];
     totalTasks: number;
     onError: () => ReactNode;
     onLoading: () => ReactNode;

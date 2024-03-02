@@ -18,6 +18,7 @@ describe('Empty Todos Testing', () => {
                 render={() => <></>}
             />
         )
+        //@ts-ignore
         expect(screen.getByTestId("todoError")).toHaveTextContent("Error has been occurred, Please try again Later")
     })
 })
