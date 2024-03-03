@@ -1,4 +1,5 @@
 import { CreateTodoButton } from './Components/Atoms/CreateTodoButton/CreateTodoButton';
+import { ChangeAlertWithStorageLister } from './Components/Molecules/ChangeAlert';
 import { EmptyTodos } from './Components/Molecules/LoadingSkeletons/EmptyTodos';
 import { TodosError } from './Components/Molecules/LoadingSkeletons/Error/Error';
 import { Modal } from './Components/Molecules/Modal';
@@ -12,7 +13,7 @@ import { useTodos } from './Hooks/useTodos';
 
 function App() {
 
-  const { state, stateUpdater } = useTodos([]);
+  const { state, stateUpdater } = useTodos();
 
   const {
     openModal,
@@ -20,7 +21,8 @@ function App() {
     filteredTodoList,
     realizedTasks,
     loadingTasks,
-    searchValue
+    searchValue,
+    error
   } = state;
 
   const {
@@ -28,7 +30,8 @@ function App() {
     deleteTodo,
     setOpenModal,
     addTodo,
-    setSearchValue
+    setSearchValue,
+    setSincronizedItem
   } = stateUpdater;
 
   return (
@@ -39,7 +42,7 @@ function App() {
       </header>
 
       <TodoList
-        error={false}
+        error={error}
         loading={loadingTasks}
         filteredTodoList={filteredTodoList}
         totalTasks={totalTasks}
@@ -65,6 +68,8 @@ function App() {
       <CreateTodoButton
         setOpenModal={setOpenModal}
       />
+
+      <ChangeAlertWithStorageLister setSincronizedItem={setSincronizedItem} />
 
     </>
   )

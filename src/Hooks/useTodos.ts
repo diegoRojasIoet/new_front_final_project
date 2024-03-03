@@ -1,20 +1,23 @@
 import { useState } from 'react';
+import { useLocalStorage } from './useLocalStorage';
 
-interface Todo{
-    text: string;
-    completed: boolean;
-}
+function useTodos() {
+    const {
+        item: todoList,
+        savedLocalTodoList: setTodoList,
+        loading: loadingTasks,
+        error,
+        setSincronizedItem
+    } = useLocalStorage('TODOS_V1', []);
 
-function useTodos(initalState: Todo[]) {
-
-    const [todoList, setTodoList] = useState<Todo[]>(initalState);
+    // const [todoList, setTodoList] = useState<Todo[]>(initalState);
     const [openModal, setOpenModal] = useState(false);
 
     const [searchValue, setSearchValue] = useState('')
     //@ts-ignore
     const realizedTasks = todoList.filter((task) => task.completed).length
     const totalTasks = todoList.length
-    const [loadingTasks, setLoadingTasks] = useState(false)
+    // const [loadingTasks, setLoadingTasks] = useState(false)
     //@ts-ignore
     const filteredTodoList = todoList.filter((task) => task.text.toLowerCase().includes(searchValue.toLowerCase()));
 
@@ -45,17 +48,17 @@ function useTodos(initalState: Todo[]) {
     const addTodo = (text: string) => {
         let newTodos = [...todoList];
         const exisitingTodo = newTodos.find((todo) => todo.text === text)
-        if(exisitingTodo){
-            alert(`Todo ${text} already exist` )
+        if (exisitingTodo) {
+            alert(`Todo ${text} already exist`)
             return
         }
         newTodos.push({
-          text:text,
-          completed: false
+            text: text,
+            completed: false
         })
         setTodoList(newTodos)
-    
-      }
+
+    }
 
     const state = {
         openModal,
@@ -63,7 +66,8 @@ function useTodos(initalState: Todo[]) {
         filteredTodoList,
         realizedTasks,
         loadingTasks,
-        searchValue
+        searchValue,
+        error,
     }
 
     const stateUpdater = {
@@ -71,7 +75,8 @@ function useTodos(initalState: Todo[]) {
         deleteTodo,
         setOpenModal,
         addTodo,
-        setSearchValue
+        setSearchValue,
+        setSincronizedItem
     }
     return {
         state,
