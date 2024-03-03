@@ -17,26 +17,30 @@ function App() {
   const {
     openModal,
     totalTasks,
-    filteredTodoList
+    filteredTodoList,
+    realizedTasks,
+    loadingTasks,
+    searchValue
   } = state;
 
   const {
     toggleTodo,
     deleteTodo,
     setOpenModal,
-    addTodo
+    addTodo,
+    setSearchValue
   } = stateUpdater;
 
   return (
     <>
       <header >
-        <TodoCounter />
-        <TodoSearch searchValue={'searchValue'} setSearchValue={() => { }} loading={false} />
+        <TodoCounter totalTasks={totalTasks} realizedTasks={realizedTasks} loading={loadingTasks} />
+        <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} loading={loadingTasks} />
       </header>
 
       <TodoList
         error={false}
-        loading={false}
+        loading={loadingTasks}
         filteredTodoList={filteredTodoList}
         totalTasks={totalTasks}
         onError={() => <TodosError></TodosError>}

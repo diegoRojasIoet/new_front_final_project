@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 
 const Header = styled.header`
@@ -18,15 +19,29 @@ const Counter = styled.p`
 `
 
 interface TodoCounterProps {
+  totalTasks: number
+  realizedTasks: number
+  loading: boolean
   // Add any props if needed
 }
 
-const TodoCounter: React.FC<TodoCounterProps> = () => {
+const TodoCounter: React.FC<TodoCounterProps> = ({ totalTasks, realizedTasks, loading }) => {
+
+  useEffect(() => {
+    let pendingTasks = totalTasks - realizedTasks
+
+    if (pendingTasks !== 0) {
+      document.title = `Pending ${pendingTasks} Task`;
+    } else {
+      document.title = `No Pending Task`;
+
+    }
+  }, [realizedTasks, totalTasks])
   return (
     <Header>
       <Title>Tasks</Title>
-      <Counter>Completed 5 of 10 tasks</Counter>
-      <Counter>Counting tasks...</Counter>
+      {!loading && <Counter>Completed {realizedTasks} of {totalTasks} tasks</Counter>}
+      {loading && <Counter>Counting tasks...</Counter>}
     </Header>
   );
 };

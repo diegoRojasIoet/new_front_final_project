@@ -8,12 +8,13 @@ interface Todo{
 function useTodos(initalState: Todo[]) {
 
     const [todoList, setTodoList] = useState<Todo[]>(initalState);
-    const [openModal, setOpenModal] = useState(true);
+    const [openModal, setOpenModal] = useState(false);
 
     const [searchValue, setSearchValue] = useState('')
     //@ts-ignore
     const realizedTasks = todoList.filter((task) => task.completed).length
     const totalTasks = todoList.length
+    const [loadingTasks, setLoadingTasks] = useState(false)
     //@ts-ignore
     const filteredTodoList = todoList.filter((task) => task.text.toLowerCase().includes(searchValue.toLowerCase()));
 
@@ -43,6 +44,11 @@ function useTodos(initalState: Todo[]) {
     }
     const addTodo = (text: string) => {
         let newTodos = [...todoList];
+        const exisitingTodo = newTodos.find((todo) => todo.text === text)
+        if(exisitingTodo){
+            alert(`Todo ${text} already exist` )
+            return
+        }
         newTodos.push({
           text:text,
           completed: false
@@ -55,14 +61,17 @@ function useTodos(initalState: Todo[]) {
         openModal,
         totalTasks,
         filteredTodoList,
-        realizedTasks
+        realizedTasks,
+        loadingTasks,
+        searchValue
     }
 
     const stateUpdater = {
         toggleTodo,
         deleteTodo,
         setOpenModal,
-        addTodo
+        addTodo,
+        setSearchValue
     }
     return {
         state,
