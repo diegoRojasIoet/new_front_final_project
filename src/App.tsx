@@ -43,26 +43,26 @@ function App() {
         onLoading={() => <></>}
         onEmptyTodos={() => <EmptyTodos></EmptyTodos>}
         onEmptySearchResults={() => <p> there's no match for {'search'} </p>}
-        render={todo => {
+        render={(todo: any, idx: number) => {
           return <TodoItem
-            key={todo.text}
+            key={`${todo.text}-${idx}`}
             todo={todo}
             onComplete={() => toggleTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
           />
         }} />
-      
+
       {openModal && (
         <Modal>
           <TodoForm addTodo={addTodo} setOpenModal={setOpenModal} />
         </Modal>
       )}
-      
-      <CreateTodoButton 
-      setOpenModal={setOpenModal}
-    />
+
+      <CreateTodoButton
+        setOpenModal={setOpenModal}
+      />
 
     </>
-    )
+  )
 }
 export default App;

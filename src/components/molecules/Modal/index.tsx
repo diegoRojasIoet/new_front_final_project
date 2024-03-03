@@ -1,5 +1,4 @@
-import { FC, PropsWithChildren, ReactNode } from 'react';
-import ReactDOM from 'react-dom';
+import { FC, PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 const ModalContainer = styled.div`
@@ -15,12 +14,7 @@ const ModalContainer = styled.div`
 `;
 
 const Modal: FC<PropsWithChildren> = ({ children }) => {
-  return ReactDOM.createPortal(
-    <ModalContainer className='Modal-container'>
-      {children}
-    </ModalContainer>,
-    document.getElementById('modal') as HTMLElement
-  );
+  return <ModalContainer>{children}</ModalContainer>
 }
 
 export { Modal };

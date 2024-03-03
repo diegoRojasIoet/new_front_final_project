@@ -5,7 +5,7 @@ import OkIcon from '../../../assets/ok_icon.png';
 
 
 interface ListItemProps{
-    completed: any;
+    completed: boolean;
     children: ReactNode;
 } ;
 

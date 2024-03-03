@@ -1,9 +1,14 @@
 import { useState } from 'react';
 
-function useTodos(initalState: any[]) {
+interface Todo{
+    text: string;
+    completed: boolean;
+}
 
-    const [todoList, setTodoList] = useState(initalState);
-    const [openModal, setOpenModal] = useState(false);
+function useTodos(initalState: Todo[]) {
+
+    const [todoList, setTodoList] = useState<Todo[]>(initalState);
+    const [openModal, setOpenModal] = useState(true);
 
     const [searchValue, setSearchValue] = useState('')
     //@ts-ignore
@@ -40,7 +45,7 @@ function useTodos(initalState: any[]) {
         let newTodos = [...todoList];
         newTodos.push({
           text:text,
-          completed:false
+          completed: false
         })
         setTodoList(newTodos)
     

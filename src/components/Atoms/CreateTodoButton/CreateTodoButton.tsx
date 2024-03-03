@@ -1,14 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Container = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: center;
+  z-index: 2;
+`
 const ButtonContainer = styled.div`
   position:relative;
   display:flex;
   justify-content: flex-end;
   margin 10px auto 0;
+  width: 100%;
   max-width: 41rem;
   z-index: 2;
 `
+
 const Button = styled.button`
   position:absolute;
   width:3.5rem;
@@ -25,13 +33,16 @@ interface CreateTodoButtonProps {
     setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CreateTodoButton = ({setOpenModal}: CreateTodoButtonProps): JSX.Element => {
-  return (
-    <ButtonContainer>
-        <Button
-        onClick={() => setOpenModal((prevState) => !prevState)}
-        >+</Button>
-    </ButtonContainer>
-  )
+const CreateTodoButton = ({ setOpenModal }: CreateTodoButtonProps): JSX.Element => {
+    return (
+        <Container>
+            <ButtonContainer>
+                <Button
+                    onClick={() => setOpenModal((prevState) => !prevState)}
+                >+</Button>
+            </ButtonContainer>
+        </Container>
+
+    )
 }
 export { CreateTodoButton };
