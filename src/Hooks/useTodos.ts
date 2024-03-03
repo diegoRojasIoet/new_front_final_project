@@ -1,8 +1,15 @@
 import { useState } from 'react';
 
-function useTodos(initalState: any[]) {
+interface Todo{
+    text: string;
+    completed: boolean;
+}
 
-    const [todoList, setTodoList] = useState(initalState);
+function useTodos(initalState: Todo[]) {
+
+    const [todoList, setTodoList] = useState<Todo[]>(initalState);
+    const [openModal, setOpenModal] = useState(true);
+
     const [searchValue, setSearchValue] = useState('')
     //@ts-ignore
     const realizedTasks = todoList.filter((task) => task.completed).length
@@ -30,12 +37,22 @@ function useTodos(initalState: any[]) {
     }
 
     const deleteTodo = (text: string) => {
-        let {idx,newTodos} = getIdxCopyList(text);
+        let { idx, newTodos } = getIdxCopyList(text);
         newTodos.splice(idx, 1);
         setTodoList(newTodos);
+    }
+    const addTodo = (text: string) => {
+        let newTodos = [...todoList];
+        newTodos.push({
+          text:text,
+          completed: false
+        })
+        setTodoList(newTodos)
+    
       }
 
     const state = {
+        openModal,
         totalTasks,
         filteredTodoList,
         realizedTasks
@@ -43,7 +60,9 @@ function useTodos(initalState: any[]) {
 
     const stateUpdater = {
         toggleTodo,
-        deleteTodo
+        deleteTodo,
+        setOpenModal,
+        addTodo
     }
     return {
         state,

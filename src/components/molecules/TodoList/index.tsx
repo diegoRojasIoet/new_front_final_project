@@ -43,7 +43,7 @@ interface TodoListProps {
     onLoading: () => ReactNode;
     onEmptyTodos: () => ReactNode;
     onEmptySearchResults: () => ReactNode;
-    render: (todo: any) => ReactNode;
+    render: (todo: any, idx: number) => ReactNode;
 }
 
 const TodoList: FC<TodoListProps> = ({
@@ -65,7 +65,7 @@ const TodoList: FC<TodoListProps> = ({
                 {!loading && totalTasks === 0 && onEmptyTodos()}
                 {/* {!loading && !(totalTasks === 0) && !filteredTodoList.length && onEmptySearchResults()} */}
                 {loading && onLoading()}
-                {filteredTodoList.map((todo) => render(todo))}
+                {filteredTodoList.map((todo,idx) => render(todo,idx))}
 
             </ListItem>
         </Section>
