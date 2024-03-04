@@ -10,14 +10,12 @@ function useTodos() {
         setSincronizedItem
     } = useLocalStorage('TODOS_V1', []);
 
-    // const [todoList, setTodoList] = useState<Todo[]>(initalState);
     const [openModal, setOpenModal] = useState(false);
 
     const [searchValue, setSearchValue] = useState('')
     //@ts-ignore
     const realizedTasks = todoList.filter((task) => task.completed).length
     const totalTasks = todoList.length
-    // const [loadingTasks, setLoadingTasks] = useState(false)
     //@ts-ignore
     const filteredTodoList = todoList.filter((task) => task.text.toLowerCase().includes(searchValue.toLowerCase()));
 
