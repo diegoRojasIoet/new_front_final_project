@@ -19,7 +19,6 @@ interface TodoCounterProps {
   totalTasks: number
   realizedTasks: number
   loading: boolean
-  // Add any props if needed
 }
 
 const TodoCounter: React.FC<TodoCounterProps> = ({ totalTasks, realizedTasks, loading }) => {
