@@ -63,7 +63,7 @@ const TodoList: FC<TodoListProps> = ({
             <ListItem>
                 {error && onError()}
                 {!loading && totalTasks === 0 && onEmptyTodos()}
-                {/* {!loading && !(totalTasks === 0) && !filteredTodoList.length && onEmptySearchResults()} */}
+                {!loading && !(totalTasks === 0) && !filteredTodoList.length && onEmptySearchResults()}
                 {loading && onLoading()}
                 {filteredTodoList.map((todo,idx) => render(todo,idx))}
 

@@ -2,6 +2,7 @@ import { CreateTodoButton } from './Components/Atoms/CreateTodoButton/CreateTodo
 import { ChangeAlertWithStorageLister } from './Components/Molecules/ChangeAlert';
 import { EmptyTodos } from './Components/Molecules/LoadingSkeletons/EmptyTodos';
 import { TodosError } from './Components/Molecules/LoadingSkeletons/Error/Error';
+import { TodosLoading } from './Components/Molecules/LoadingSkeletons/TodosLoading';
 import { Modal } from './Components/Molecules/Modal';
 import { TodoCounter } from './Components/Molecules/TodoCounter'
 import { TodoForm } from './Components/Molecules/TodoForm';
@@ -47,7 +48,7 @@ function App() {
         filteredTodoList={filteredTodoList}
         totalTasks={totalTasks}
         onError={() => <TodosError></TodosError>}
-        onLoading={() => <></>}
+        onLoading={() => <TodosLoading/>}
         onEmptyTodos={() => <EmptyTodos></EmptyTodos>}
         onEmptySearchResults={() => <p> there's no match for {'search'} </p>}
         render={(todo: any, idx: number) => {

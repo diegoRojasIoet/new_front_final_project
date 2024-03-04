@@ -7,14 +7,11 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   margin:1rem;
+  color: white;
 `;
-const Title = styled.h2`
-  color:#5E454B;
-`
 const Counter = styled.p`
   font-size:1.4rem;
   line-height:2rem;
-  color:#5E454B;
 
 `
 
@@ -34,12 +31,11 @@ const TodoCounter: React.FC<TodoCounterProps> = ({ totalTasks, realizedTasks, lo
       document.title = `Pending ${pendingTasks} Task`;
     } else {
       document.title = `No Pending Task`;
-
     }
   }, [realizedTasks, totalTasks])
   return (
     <Header>
-      <Title>Tasks</Title>
+      <h2>Tasks</h2>
       {!loading && <Counter>Completed {realizedTasks} of {totalTasks} tasks</Counter>}
       {loading && <Counter>Counting tasks...</Counter>}
     </Header>
